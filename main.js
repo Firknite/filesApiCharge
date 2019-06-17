@@ -36,19 +36,18 @@ var guardarExcel = (x,y) => {
 		if (err) {
 			return y.status(500).send(err);
 		} else {
-			var acumula = x => (x+1)
 			let cont = 1, json = transformExcel(), params = {}, salida = []			
 			Object.keys(json).map((x)=> {
 				if(x!='!ref' && x!='!margins') {
 					if (cont==1) {
 						params.codigo = json[x].v
-						acumula(cont)
+						cont++
 					} else if (cont==2) {
 						params.sku = json[x].v
-						acumula(cont)
+						cont++
 					} else if (cont==3) {
 						params.descripcion = json[x].v
-						acumula(cont)
+						cont++
 					} else if (cont==4) {
 						params.valor = json[x].v
 						salida.push(params)
